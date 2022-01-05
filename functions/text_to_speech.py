@@ -1,7 +1,4 @@
-from gtts import gTTS
-import os
-import playsound
-
+from config import *
 def text_to_speech(text: str):
     language = "en"
     
@@ -13,4 +10,4 @@ def text_to_speech(text: str):
     
     
     
-text_to_speech("My name is Irene. I am sexy and I know it.")
+# text_to_speech("My name is Irene. I am sexy and I know it.")
