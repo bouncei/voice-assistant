@@ -10,4 +10,3 @@ def text_to_speech(text: str):
     
     
     
-# text_to_speech("My name is Irene. I am sexy and I know it.")
