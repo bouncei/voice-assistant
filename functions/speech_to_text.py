@@ -1,6 +1,6 @@
 from config import *
 from functions.text_to_speech import speak
-import random
+
 
 Reply = ["Boss B's my one and only name - use as often as you'd like! ",
          "The name is Boss B - easy to remember!", "They call me Boss B, and by 'they,' I mean everyone! ",
