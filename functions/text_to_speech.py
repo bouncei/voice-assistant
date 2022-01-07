@@ -1,5 +1,6 @@
 from config import *
-def text_to_speech(text: str):
+
+def speak(text: str):
     language = "en"
     
     speech = gTTS(text=text, lang=language)

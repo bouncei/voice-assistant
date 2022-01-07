@@ -1,5 +1,5 @@
 from config import *
-from functions.text_to_speech import text_to_speech
+from functions.text_to_speech import speak
 from functions.speech_to_text import get_audio
 
 if __name__ == "__main__":
