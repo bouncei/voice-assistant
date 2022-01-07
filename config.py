@@ -6,7 +6,7 @@ import speech_recognition as sr
 import random
 from datetime import datetime
 from datetime import date
-# from config import *
+
 import datetime
 import os.path
 
