@@ -1,29 +1,4 @@
-# from config import *
-from __future__ import print_function
-from gtts import gTTS
-import os
-import playsound
-import speech_recognition as sr
-import random
-from datetime import datetime
-from datetime import date
-
-import datetime
-import os.path
-
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-
-SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-
-MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
-DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
-DAY_EXTENTION = ["rd", "th", "st"]
-
-
+from config import *
 
 
 def main():
@@ -42,7 +17,7 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                '/home/derfedoc/Documents/Bouncey/tts/Voice Assitance/client_secret_726867248782-5v167cbaqpi25lnsos9nan4kffh3jfdk.apps.googleusercontent.com (2).json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
@@ -72,12 +47,5 @@ def main():
         print('An error occurred: %s' % error)
 
 
-if __name__ == '__main__':
-    main()
-# def get_date(text):
-#     text = text.lower()
-#     today = date.today()  #Gets present day date
-    
-    
-#     if text.count("today") > 0:
-#         return today
+# if __name__ == '__main__':
+#     main()
