@@ -1,5 +1,5 @@
 env
 /env
 *env
-*credentials.json
-.credentials.json
+
+json_files
