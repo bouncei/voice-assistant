@@ -1,7 +1,19 @@
-from config import *
+from __future__ import print_function
+
+import datetime
+import os.path
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+
+# If modifying these scopes, delete the file token.json.
+SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
-def main():
+def authenticate_google():
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
     """
@@ -17,35 +29,37 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                '/home/derfedoc/Documents/Bouncey/tts/Voice Assitance/client_secret_726867248782-5v167cbaqpi25lnsos9nan4kffh3jfdk.apps.googleusercontent.com (2).json', SCOPES)
+                'credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
-    try:
-        service = build('calendar', 'v3', credentials=creds)
 
-        # Call the Calendar API
-        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-        print('Getting the upcoming 10 events')
-        events_result = service.events().list(calendarId='primary', timeMin=now,
-                                              maxResults=10, singleEvents=True,
-                                              orderBy='startTime').execute()
-        events = events_result.get('items', [])
+    service = build('calendar', 'v3', credentials=creds)
+    
+    return service 
 
-        if not events:
-            print('No upcoming events found.')
-            return
+def get_events(n, service):
 
-        # Prints the start and name of the next 10 events
-        for event in events:
-            start = event['start'].get('dateTime', event['start'].get('date'))
-            print(start, event['summary'])
+    """Calls The calender API.
+    Checks and prints out all the upcoming events.
+    """
+    now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
+    print(f'Getting the upcoming {n} events')
+    events_result = service.events().list(calendarId='primary', timeMin=now,
+                                            maxResults=n, singleEvents=True,
+                                            orderBy='startTime').execute()
+    events = events_result.get('items', [])
 
-    except HttpError as error:
-        print('An error occurred: %s' % error)
+    if not events:
+        print('No upcoming events found.')
+        return
+
+    # Prints the start and name of the next 10 events
+    for event in events:
+        start = event['start'].get('dateTime', event['start'].get('date'))
+        print(start, event['summary'])
 
 
-# if __name__ == '__main__':
-#     main()
+service = authenticate_google()
