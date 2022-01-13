@@ -29,14 +29,14 @@ def get_audio():
             r.adjust_for_ambient_noise(source,duration=1)
             said = r.recognize_google(audio) #Performs speech recognition on audio_data
             
-            if "what is your name" or "what's your name" in said:
-                response = random.choice(Reply)
-                speak(response)
+            # if "what is your name" or "what's your name" in said:
+            #     response = random.choice(Reply)
+            #     speak(response)
             
             
            
             
-            print(said + " : ", response)
+            # print(said + " : ", response)
             
         except Exception as e:
             print("Exception: ", str(e))
