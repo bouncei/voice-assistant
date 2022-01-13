@@ -9,8 +9,9 @@ if __name__ == "__main__":
     
     # get_events(3, service)
     
+    
     text = get_audio().lower()
-    print(get_date(text))
+    get_events((get_date(text)), service)
     
 
     

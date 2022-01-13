@@ -1,5 +1,5 @@
 from __future__ import print_function
-from gtts import gTTS
+import pyttsx3
 import os
 import playsound
 import speech_recognition as sr
@@ -16,6 +16,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+import pytz
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -27,5 +29,5 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
 DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
-DAY_EXTENTION = ["rd", "th", "st"]
+DAY_EXTENTION = ["rd", "th", "st", "nd"]
 

@@ -30,15 +30,22 @@ def authenticate_google():
     return service 
 
 
-def get_events(n, service):
+def get_events(day, service):
 
     """Calls The calender API.
     Checks and prints out all the upcoming events.
     """
-    now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-    print(f'Getting the upcoming {n} events')
-    events_result = service.events().list(calendarId='primary', timeMin=now,
-                                            maxResults=n, singleEvents=True,
+    
+    date = datetime.datetime.combine(day, datetime.datetime.min.time())
+    end_date = datetime.datetime.combine(day, datetime.datetime.Smax.time())
+    
+    utc = pytz.UTC
+    date = date.astimezone(utc)
+    end_date = end_date.astimezone(utc)
+    
+    
+    events_result = service.events().list(calendarId='primary', timeMin=date, timeMax=end_date,
+                                             singleEvents=True,
                                             orderBy='startTime').execute()
     events = events_result.get('items', [])
 
@@ -108,6 +115,7 @@ def get_date(text):
                 
         return today + datetime.timedelta(diff)
     
+    print(month)
     return datetime.date(month=month, day=day, year=year) 
     
     
