@@ -1,4 +1,5 @@
 from config import *
+from functions.text_to_speech import speak
 
 
 
@@ -37,7 +38,7 @@ def get_events(day, service):
     """
     
     date = datetime.datetime.combine(day, datetime.datetime.min.time())
-    end_date = datetime.datetime.combine(day, datetime.datetime.Smax.time())
+    end_date = datetime.datetime.combine(day, datetime.datetime.max.time())
     
     utc = pytz.UTC
     date = date.astimezone(utc)
@@ -53,10 +54,24 @@ def get_events(day, service):
         print('No upcoming events found.')
         return
 
-    # Prints the start and name of the next 10 events
-    for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(start, event['summary'])
+    else:
+        speak(f"You have {len(events)} events on this day.")
+        
+        #   Prints the start and name of the next 10 events
+        for event in events:
+            start = event['start'].get('dateTime', event['start'].get('date'))
+            print(start, event['summary'])
+            start_time = str(start.split("T")[1].split("-")[0])
+            
+            if int(start_time.split(":")[0]) < 12:
+                start_time = start_time + "am"
+                
+            else:
+                start_time = start_time + "pm"
+                
+            speak(event["summary"] + "at" + start_time)
+            
+            
 
 
 service = authenticate_google()
@@ -115,7 +130,11 @@ def get_date(text):
                 
         return today + datetime.timedelta(diff)
     
+    if month == -1 or day == -1:
+        return None
+    
     print(month)
+    
     return datetime.date(month=month, day=day, year=year) 
     
     

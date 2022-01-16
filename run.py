@@ -12,6 +12,7 @@ if __name__ == "__main__":
     
     text = get_audio().lower()
     get_events((get_date(text)), service)
+    # get_events(get_date("What do i have on monday"), service)                                                                                                            
     
 
     

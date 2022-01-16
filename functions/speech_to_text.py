@@ -11,7 +11,7 @@ Reply = ["Boss B's my one and only name - use as often as you'd like! ",
 
 def get_audio():
     """
-        Getting Input From Users Throgh The Microphone Using The Pyaudio and Speech Recognition libaries.
+        Getting Input From Users Throgh The Microphone Using The Pyaudio and Speech Recognition libaries and Converts it to Text.
          
     """
     r = sr.Recognizer() # Recognizer Object: Creates a new Recognizer instance, which represents a collection of speech recognition functionality.
