@@ -1,7 +1,6 @@
 from __future__ import print_function
-import pyttsx3
 import os
-import playsound
+# import playsound
 import speech_recognition as sr
 import random
 from datetime import datetime
@@ -18,6 +17,7 @@ from googleapiclient.errors import HttpError
 
 import pytz
 
+import pyttsx3
 from dotenv import load_dotenv
 load_dotenv()
 
