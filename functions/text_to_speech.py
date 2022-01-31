@@ -1,14 +1,25 @@
 # from config import *
 import pyttsx3
-def speak():
+from gtts import gTTS
+import os
+import playsound
+
+def speak(text):
     """
         Gets text input from the user and converts it to audio.
     """
-    engine = pyttsx3.init()
-    engine.say("Hello my boss.")
+    # engine = pyttsx3.init()
+    # engine.say(text)
     
-    engine.runAndWait()
+    # engine.runAndWait()
     
+    language = "en"
     
+    myObj = gTTS(str(text), lang=language, slow=False)
     
-speak()
+    myObj.save("audio_files/audio.mp3")
+
+
+    playsound.playsound("audio_files/audio.mp3")
+    
+# speak("Hello Boss Bouncey")
